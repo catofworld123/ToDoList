@@ -1,36 +1,38 @@
 {
   "schemaVersion": 1,
-  "id": "tdl",
-  "version": "1.0.3",
-  "name": "To Do List",
-  "description": "Adds a todo list GUI in the game. Useful?",
+  "id": "modid",
+  "version": "${version}",
+
+  "name": "Example Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "cat_of_world"
+    "Me!"
   ],
   "contact": {
-    "homepage": "https://github.com/catofworld123/ToDoList",
-    "sources": "https://github.com/catofworld123/ToDoList",
-    "issues": "https://github.com/catofworld123/ToDoList/issues"
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
+
   "license": "CC0-1.0",
-  "icon": "assets/tdl/icon.png",
+  "icon": "assets/modid/icon.png",
+
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "net.fabricmc.todolist.ToDoListMod"
+    "init": [
+      "net.fabricmc.example.ExampleMod"
     ],
-    "btw:addon": [
-      "btw.community.todolist.ToDoListAddon"
+    "preLaunch": [
+      "net.fabricmc.example.ExamplePreLaunchInitializer"
     ]
   },
-  "custom": {
-    "btw:addon_prefix": "TDL"
-  },
   "mixins": [
-    "tdl.mixins.json"
+    "modid.mixins.json"
   ],
+
   "depends": {
-    "fabricloader": ">=0.14.25",
-    "minecraft": "1.6.4"
+    "fabricloader": ">=0.7.4"
+  },
+  "suggests": {
+    "flamingo": "*"
   }
 }
