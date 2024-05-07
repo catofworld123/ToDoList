@@ -1,69 +1,79 @@
-# BTW-gradle-fabric-example
+# Fabric Example Mod
 
-This repository is based on the [BTW-Gradle](https://github.com/BTW-Community/BTW-gradle) and the [Example Mod](https://github.com/minecraft-cursed-legacy/Example-Mod)
-repositories, combining them to enable fabric development for the Better Than Wolves mod.
-**This repository was only tested for client-side development yet.** 
+- [Quick start guide](#quick-start-guide)
+  - [Introduction to the folder structure](#introduction-to-the-folder-structure)
+  - [Creating your mod](#creating-your-mod)
+  - [Useful gradle commands](#useful-gradle-commands)
+- [More info](#more-info)
+- [License](#license)
 
-## Quick Start
+## Quick start guide
 
 * Clone this repository
-* Acquire the full BTW sources and put them under `src/btw/java` 
-* (Optional) Put the BTW resources (textures, etc.) under `src/btw/resources`
-* Run the gradle task *btwJar*
+* Download the according BTW-CE 3.0+ *intermediary* release
+* Drag&Drop the intermediary .zip file onto the *install.bat*
+* Wait till it fully finishes
 * Run the gradle task *build* and then *runClient*
-* (Optional) Put the vanilla MC resources (sounds) under `run/resources`
 
-## BTW Source Code
+### Introduction to the folder structure
 
-To get access to the Better Than Wolves source code, please refer to the [BTW-Gradle repository](https://github.com/BTW-Community/BTW-gradle)
- or (alternatively) the [BTW-Public repository](https://github.com/BTW-Community/BTW-Public), which also offers a way to generate the sources.
+**Build files:**
 
-## Development
+| File                | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `build.gradle`      | Configures the compilation process.                      |
+| `gradle.properties` | Contains properties for Minecraft, fabric, and your mod. |
+| `settings.gradle`   | Configures the plugin repositories.                      |
 
-Similar to the [BTW-Gradle](https://github.com/BTW-Community/BTW-gradle) project, this repository comes with a few configuration files for IntelliJ IDEA.
+**Fabric files:**
 
-In this repository, there is an example implementation of a fabric mod that is a BTW-Addon at the same time. Base class overwrites,
-either for initializing your BTW-Addon or for changes to the functionality of MC are in many cases not needed 
-anymore. (But they are still possible, put the overwriting-sources under `main/java/net/minecraft/src`.
- This requires your mod to be loaded as a coremod, which is currently not supported in a dev-environment - only in production.) The
-addon initialization is taken care of by the PreLaunchInitializer.
- 
-For functionality changes to base classes, please have a look at mixins, which enable you
-to inject code at runtime, offering much better compatibility. Most fabric-mixin tutorials should apply here, but keep in
-mind that no fabric-api is available yet, just bare mixins. An even more powerful alternative is fabric-asm, but this has not
-been tested yet.
+These files are located at `src/main/resources`.
 
-If you use reflection, please keep in mind that it is now, in many cases at least, not needed anymore, in addition to the fact that fabric
-remaps Minecraft at runtime into an intermediary form, which is different from the obfuscated one. To get the intermediary names
-of classes, fields, and methods, have a look at the mappings under `custom_mappings`.
-
-## Releasing Mods/Addons
-
-If you want to run fabric mods with BTW in a non-dev environment, you have to either use 
-the [BTW-fabric MultiMC instance](https://github.com/BTW-Community/cursed-fabric-loader/releases/latest) (recommended) or 
-follow the [installation instructions for the Vanilla launcher](https://github.com/BTW-Community/legacy-fabric-installer/releases/latest).
+| File                    | Description                              | Additional information                                                                                                |
+| ----------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `fabric.mod.json`       | Contains metadata about your mod.        | [wiki:fabric_mod_json_spec](https://fabricmc.net/wiki/documentation:fabric_mod_json_spec)                             |
+| `modid.mixins.json`     | Contains a list of all your mixin files. | [wiki:mixin_registration](https://fabricmc.net/wiki/tutorial:mixin_registration)                                      |
+| `assets/modid/icon.png` | The icon of your mod.                    | [wiki:fabric_mod_json_spec#icon](https://fabricmc.net/wiki/documentation:fabric_mod_json_spec?s[]=icon#custom_fields) |
 
 
-Drop on by the discord server if you need help: [BTW Discord](https://discord.gg/fhMK5kx). 
+### Creating your mod
 
-The mod file for the release is generated by the Gradle task *remapJar* and then put into `release`.
+First of you must replace all occurrences of `modid` with the id of your mod.
 
-After successfully importing the MultiMC instance, you can put your mod file into the mods folder of your installation. 
-If it is a coremod, put it into coremods.
+If your mod doesn't use mixins you can safely remove the mixin entry in your `fabric.mod.json` as well as delete any `*.mixin.json` files.
 
-## Issues & Troubleshooting
+This template has the legacy fabric api included in it's build script, more info about the api can be found at it's [github repo](https://github.com/Legacy-Fabric/fabric).
+If you know what you are doing you can also safely remove the api from the build script as it isn't required.
 
-* How do I obtain the BTW-sources? *Please refer to [BTW-Gradle](https://github.com/BTW-Community/BTW-gradle) or [BTW-Public](https://github.com/BTW-Community/BTW-Public).* 
+### Useful gradle commands
 
-More troubleshooting is still todo. Feel free to message me on Discord.
+```sh
+# Compile your mod
+./gradlew build
 
-## MultiMC Remarks
-* The MultiMC instance should support most BTW versions and their addons, install them normally via `Add to Minecraft.jar`.
-* Addons developed outside of the fabric environment that use 
-Java reflection might not work if they reference obfuscated names via Strings (as mentioned above). 
-Porting those addons is a simple process though, as only the new intermediary names have to be adopted.
+# Remove old build files
+./gradlew clean
+
+# Generate Minecraft sources
+./gradlew genSources
+
+# Launch a modded Minecraft client
+./gradlew runClient
+
+# Kill gradle if it's doing stupid things
+./gradlew --stop
+```
+
+## More info
+
+Additional tutorials and tips can be found in the [wiki](https://github.com/Legacy-Fabric/fabric-example-mod/wiki).
+
+For more detailed setup instructions please see the [fabric wiki](https://fabricmc.net/wiki/tutorial:setup).
+
+If you are new to fabric or Minecraft modding in general then [this wiki page](https://fabricmc.net/wiki/tutorial:primer) may help you.
 
 ## License
+
+This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
 This project incorporates:
-* A modified version of [Fabric Loom](https://github.com/FabricMC/fabric-loom) (MIT)
 * A precompiled version of [Tiny Remapper](https://github.com/FabricMC/tiny-remapper) (LGPL-3.0)

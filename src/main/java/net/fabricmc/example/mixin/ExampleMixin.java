@@ -1,14 +1,15 @@
 package net.fabricmc.example.mixin;
 
-import btw.BTWAddon;
+import btw.BTWMod;
+import net.minecraft.src.GuiMainMenu;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BTWAddon.class)
+@Mixin(BTWMod.class)
 public class ExampleMixin {
-	@Inject(at = @At("RETURN"), method = "<init>")
+	@Inject(at = @At("HEAD"), method = "initialize", remap = false)
 	private void init(CallbackInfo info) {
 		System.out.println("This line is printed by an example mod mixin!");
 	}
