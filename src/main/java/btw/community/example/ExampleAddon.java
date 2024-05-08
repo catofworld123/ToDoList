@@ -6,7 +6,7 @@ import btw.BTWAddon;
 public class ExampleAddon extends BTWAddon {
     private static ExampleAddon instance;
 
-    private ExampleAddon() {
+    public ExampleAddon() {
         super();
     }
 
