@@ -116,13 +116,13 @@ runServer {
 }
 
 class BTWJarReplacer implements MinecraftJarProcessor<Spec> {
-	String path
 	String name
+	String path
 
 	@javax.inject.Inject
 	BTWJarReplacer(String name, String path) {
-		this.path = path
 		this.name = name
+		this.path = path
 	}
 
 	@Override
@@ -138,6 +138,7 @@ class BTWJarReplacer implements MinecraftJarProcessor<Spec> {
 			// Print a warning if the BTW_dev zip doesn't exist.
 			System.err.println("BTW_dev zip not found, skipping BTWJarReplacer")
 		} else {
+			System.out.println("BTW_dev zip found, replacing Minecraft jar with BTW_dev jar.")
 			Files.copy(Paths.get(path, "build/BTW_dev/BTW_dev.zip"), jar, StandardCopyOption.REPLACE_EXISTING)
 			// Add Javadocs
 			Files.copy(Paths.get(path, "build/BTW_dev/BTW_dev-javadoc.jar"), jar.resolveSibling(jar.getFileName().toString().replace(".jar", "-javadoc.jar")), StandardCopyOption.REPLACE_EXISTING)
@@ -158,7 +159,11 @@ class BTWJarReplacer implements MinecraftJarProcessor<Spec> {
 
 		@Override
 		int hashCode() {
-			return path.hashCode()
+			if (!Files.exists(Paths.get(path, "build/BTW_dev/BTW_dev.zip"))) {
+				return name.hashCode()
+			} else {
+				return Files.getLastModifiedTime(Paths.get(path, "build/BTW_dev/BTW_dev.zip")).hashCode() ^ name.hashCode()
+			}
 		}
 	}
 }
