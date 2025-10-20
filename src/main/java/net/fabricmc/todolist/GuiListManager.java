@@ -3,10 +3,6 @@ package net.fabricmc.todolist;
 import net.fabricmc.todolist.util.GuiScrollingList;
 import net.minecraft.src.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class GuiListManager extends GuiIngameMenu {
 
@@ -46,7 +42,7 @@ public class GuiListManager extends GuiIngameMenu {
     private GuiButton doneBtn;
     ListManager manager = new ListManager();
 
-    public int lineAmount = manager.GetLineAmount();
+    private int lineAmount = ListManager.loadLineNum();
 
     private GuiSlotToDoList todoList;
 
@@ -54,7 +50,7 @@ public class GuiListManager extends GuiIngameMenu {
         return this.lineAmount;
     }
     public void SetLineAmount(int amount){
-        manager.SetLineAmount(amount);
+        ListManager.saveLineNum(amount);
     }
 
     @Override
@@ -115,7 +111,6 @@ public class GuiListManager extends GuiIngameMenu {
             if (guiButton.id == 0) {
                 manager.SetGoal(goalField.getText());
                 this.mc.displayGuiScreen(this.parentGuiScreen);
-                manager.UpdateList();
             }
             if (guiButton.id == 1){
                 manager.setoverlayConfig(!manager.getoverlayConfig());
@@ -157,19 +152,15 @@ public class GuiListManager extends GuiIngameMenu {
                 }
                 if (guiButton.id == 3){
                     lineAmount += 1;
-                    manager.SetLineAmount(lineAmount);
+                    ListManager.saveLineNum(lineAmount);
                     GuiButton button2 = (GuiButton) this.buttonList.get(4);
                     button2.displayString = "Line Amount: " + lineAmount;
-                    manager.UpdateList();
-
                 }
                 if (guiButton.id == 5 && lineAmount > 1){
                     lineAmount -= 1;
-                    manager.SetLineAmount(lineAmount);
+                    ListManager.saveLineNum(lineAmount);
                     GuiButton button2 = (GuiButton) this.buttonList.get(4);
                     button2.displayString = "Line Amount: " + lineAmount;
-                    manager.UpdateList();
-
                 }
             }
 
@@ -226,7 +217,5 @@ public class GuiListManager extends GuiIngameMenu {
         }
 
     }
-
-
 
 }

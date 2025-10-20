@@ -8,7 +8,6 @@ import net.minecraft.src.GuiTextField;
 import java.io.IOException;
 
 public class GuiChangeToDoListInstance extends GuiIngameMenu {
-    ListManager manager = new ListManager();
     private GuiSlotToDoList parentGuiScreen;
     private GuiButton doneBtn;
     private GuiTextField entryField;
@@ -79,7 +78,6 @@ public class GuiChangeToDoListInstance extends GuiIngameMenu {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                manager.UpdateList();
                 this.enabled = false;
                 this.mc.displayGuiScreen(this.parentGuiScreen.getParentGuiScreen());
 

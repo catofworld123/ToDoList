@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
-  "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "id": "tdl",
+  "version": "${1.0}",
+  "name": "To Do List",
+  "description": "Adds a todo list GUI in the game. Useful?",
   "authors": [
-    "Me!"
+    "cat_of_world"
   ],
   "contact": {
-    "homepage": "https://legacyfabric.net/",
+    "homepage": ":)",
     "sources": "https://github.com/Legacy-Fabric/fabric-example-mod"
   },
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/tdl/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.fabricmc.todolist.ToDoListMod"
     ],
     "btw:addon": [
-      "btw.community.example.ExampleAddon"
+      "btw.community.todolist.ToDoListAddon"
     ]
   },
   "custom": {
     "btw:addon_prefix": "EX"
   },
   "mixins": [
-    "modid.mixins.json"
+    "tdl.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.19",
