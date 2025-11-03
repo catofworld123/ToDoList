@@ -78,6 +78,7 @@ public class GuiChangeToDoListInstance extends GuiIngameMenu {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                ListManager.UpdateList();
                 this.enabled = false;
                 this.mc.displayGuiScreen(this.parentGuiScreen.getParentGuiScreen());
 
