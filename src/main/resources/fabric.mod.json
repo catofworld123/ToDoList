@@ -8,8 +8,9 @@
     "cat_of_world"
   ],
   "contact": {
-    "homepage": ":)",
-    "sources": "https://github.com/Legacy-Fabric/fabric-example-mod"
+    "homepage": "https://github.com/catofworld123/ToDoList",
+    "sources": "https://github.com/catofworld123/ToDoList",
+    "issues": "https://github.com/catofworld123/ToDoList/issues"
   },
   "license": "CC0-1.0",
   "icon": "assets/tdl/icon.png",
@@ -23,13 +24,13 @@
     ]
   },
   "custom": {
-    "btw:addon_prefix": "EX"
+    "btw:addon_prefix": "TDL"
   },
   "mixins": [
     "tdl.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.19",
+    "fabricloader": ">=0.14.25",
     "minecraft": "1.6.4"
   }
 }
