@@ -115,7 +115,7 @@ public class GuiListManager extends GuiIngameMenu {
             if (guiButton.id == 0) {
                 manager.SetGoal(goalField.getText());
                 this.mc.displayGuiScreen(this.parentGuiScreen);
-                ListManager.UpdateList();
+                manager.UpdateList();
             }
             if (guiButton.id == 1){
                 manager.setoverlayConfig(!manager.getoverlayConfig());
@@ -160,7 +160,7 @@ public class GuiListManager extends GuiIngameMenu {
                     manager.SetLineAmount(lineAmount);
                     GuiButton button2 = (GuiButton) this.buttonList.get(4);
                     button2.displayString = "Line Amount: " + lineAmount;
-                    ListManager.UpdateList();
+                    manager.UpdateList();
 
                 }
                 if (guiButton.id == 5 && lineAmount > 1){
@@ -168,7 +168,7 @@ public class GuiListManager extends GuiIngameMenu {
                     manager.SetLineAmount(lineAmount);
                     GuiButton button2 = (GuiButton) this.buttonList.get(4);
                     button2.displayString = "Line Amount: " + lineAmount;
-                    ListManager.UpdateList();
+                    manager.UpdateList();
 
                 }
             }

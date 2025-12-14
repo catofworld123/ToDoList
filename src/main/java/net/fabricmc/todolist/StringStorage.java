@@ -19,7 +19,6 @@ public class StringStorage {
     public void saveString(int index, String data) throws IOException {
         List<String> lines = new ArrayList<>();
 
-
         if (Files.exists(filePath)) {
             lines = Files.readAllLines(filePath);
         }

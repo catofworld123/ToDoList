@@ -27,7 +27,7 @@ public class ListManager {
 
 
     //SETTERS
-    public static List<String> strings = new ArrayList<>(){
+    private  List<String> strings = new ArrayList<>(){
         {
             for (int i = 0; i < loadLineNum(); i++) {
                 StringStorage storage = new StringStorage("ListStorage");
@@ -41,6 +41,24 @@ public class ListManager {
             }
         }
     };
+
+    @Environment(EnvType.CLIENT)
+    public void reloadArray() {
+        strings = new ArrayList<>() {
+            {
+                for (int i = 0; i < loadLineNum(); i++) {
+                    StringStorage storage = new StringStorage("ListStorage");
+                    String text = "Something Went Wrong";
+                    try {
+                        text = (i + 1) + ". " + storage.loadStringByIndex(i);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    add(i, text);
+                }
+            }
+        };
+    }
 
     @Environment(EnvType.CLIENT)
     public void setoverlayConfig(boolean b){
@@ -94,6 +112,11 @@ public class ListManager {
     public String GetGoal(){
 
         return this.goalString;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public  List<String> getStrings(){
+        return this.strings;
     }
 
     // SAVE/LOAD SYSTEM
@@ -213,7 +236,7 @@ public class ListManager {
     }
 
 
-    public static void UpdateList(){
+    public  void UpdateList(){
         for (int i = 0; i < loadLineNum(); i++) {
             StringStorage storage = new StringStorage("ListStorage");
             String text = "Something Went Wrong";

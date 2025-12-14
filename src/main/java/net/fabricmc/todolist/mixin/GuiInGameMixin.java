@@ -30,6 +30,8 @@ public class GuiInGameMixin {
 
             ListManager manager = new ListManager();
 
+            List<String> strings = manager.getStrings();
+
             if (manager.getoverlayConfig()) {
 
                 FontRenderer renderer = this.mc.fontRenderer;
@@ -40,7 +42,8 @@ public class GuiInGameMixin {
                     int x = 1;
                     for (int i = 0;i < manager.lineNum;i++){
 
-                        String text = ListManager.strings.get(i);
+                        String text = strings.get(i);
+
                         renderer.drawString(text, x - 1, y+10*i, 0);
                         renderer.drawString(text, x + 1, y+10*i, 0);
                         renderer.drawString(text, x, y+10*i + 1, 0);
