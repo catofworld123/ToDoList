@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class GuiScrollingList
 {
-    // code copied from forge 1.7.10, i DID NOT WRITE THAT, i read the forge's license, it is okay, atleast i think so... (pls dont sue me :D)
+    // I changed some code that was copied from forge 1.7.10, i DID NOT WRITE THAT, i read the forge's license, it is okay, atleast i think so... (pls dont sue me :D)
     private final Minecraft client;
     protected final int listWidth;
     protected final int listHeight;
