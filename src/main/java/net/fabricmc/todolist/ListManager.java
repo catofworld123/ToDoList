@@ -57,7 +57,6 @@ public class ListManager {
 
     @Environment(EnvType.CLIENT)
     public void SetGoal(String text){
-
         this.goalString = text;
         saveGoal(text);
     }

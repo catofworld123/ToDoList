@@ -12,6 +12,7 @@ public class ToDoListAddon extends BTWAddon {
 
     @Override
     public void initialize() {
+
         AddonHandler.logMessage(this.getName() + " Version " + this.getVersionString() + " Initializing...");
     }
 }
