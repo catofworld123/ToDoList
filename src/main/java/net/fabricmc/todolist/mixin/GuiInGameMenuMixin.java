@@ -17,7 +17,7 @@ public class GuiInGameMenuMixin extends GuiScreen {
 
     @Inject(method = "initGui", at = @At("RETURN"))
     private void registerMyButton(CallbackInfo ci){
-        this.buttonList.add(new GuiButton(14, this.width / 2 - 100, this.height / 4 + 24 + 32,"To Do List Settings"));
+        this.buttonList.add(new GuiButton(14, this.width / 2 - 100, this.height / 4 -15,"To Do List Settings"));
     }
     @Inject(method = "actionPerformed", at = @At("RETURN"),cancellable = true)
     private void myButtonclic(GuiButton par1GuiButton, CallbackInfo ci){
